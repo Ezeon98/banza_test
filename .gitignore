@@ -1,6 +1,7 @@
 .DS_Store
 *.pyc
 __pycache__/
+.pytest_cache/
 .idea
 # compiled python files
 *.py[co]

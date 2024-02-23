@@ -10,13 +10,14 @@ router = APIRouter(
 
 
 @router.get("/categorias/")
-def get_categorias(db: Session = Depends(get_db)):
+async def get_categorias(db: Session = Depends(get_db)):
     categorias = db.query(Categoria).all()
     return {"categorias": categorias}
 
+
 @router.post("/categorias/")
-def create_categoria(categoria_data: CategoriaCreate, db: Session = Depends(get_db)):
-    db_categoria = Categoria(**categoria_data.dict())
+async def create_categoria(categoria_data: CategoriaCreate, db: Session = Depends(get_db)):
+    db_categoria = Categoria(**categoria_data.model_dump())
     db.add(db_categoria)
     db.commit()
     return {"message": "Categoria creada exitosamente"}
